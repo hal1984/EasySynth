@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Easy Synth</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-list-header no-margin>
+
+      <ion-label> Octava Seleccionada</ion-label>
+      <ion-badge> {{octave}}</ion-badge>
+    </ion-list-header>
+    <ion-item>
+      <ion-range min="-3" max="3" step="1" snaps="true" [(ngModel)]="octave">
+        <ion-icon range-left>-3</ion-icon>
+        <ion-icon range-right>+3</ion-icon>
+      </ion-range>
+    </ion-item>
+
+
+    <ion-grid class="keyboard" no-padding>
+      <ion-row class="black">
+        <ion-col [size]="12 / 8.51" [offset]="!i && (6 / 8.51) || 0.001" *ngFor="let key of keyboard.black; let i = index">
+          <ion-button size="small" expand="full" color="dark" fill="solid" *ngIf="!!key" (touchstart)="trigger(key)" (touchend)="release(key)"
+            (touchcancel)="release(key)" (mousedown)="trigger(key)" (mouseup)="release(key)" (mouseout)="release(key)">
+            {{key.name}}</ion-button>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row class="white">
+        <ion-col [size]="12 / 8.51" *ngFor="let key of keyboard.white">
+          <ion-button size="medium" expand="full" color="light" fill="solid" (touchstart)="trigger(key)" (touchend)="release(key)"
+            (touchcancel)="release(key)" (mousedown)="trigger(key)" (mouseup)="release(key)" (mouseout)="release(key)">
+            {{key.name}}</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-list>
+
+</ion-content>

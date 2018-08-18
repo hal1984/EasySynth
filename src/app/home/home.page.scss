@@ -1,0 +1,15 @@
+
+.keyboard {
+    --ion-grid-column-padding: 1px;
+    .black {
+        ion-button {
+            --height: 6em;
+        }
+    };
+    
+    .white {
+        ion-button {
+            --height: 8em;
+        }
+    };
+};
