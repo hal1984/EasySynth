@@ -7,32 +7,50 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-list-header no-margin>
 
-      <ion-label> Octava Seleccionada</ion-label>
-      <ion-badge> {{octave}}</ion-badge>
-    </ion-list-header>
     <ion-item>
-      <ion-range min="-3" max="3" step="1" snaps="true" [(ngModel)]="octave">
-        <ion-icon range-left>-3</ion-icon>
-        <ion-icon range-right>+3</ion-icon>
-      </ion-range>
+      <ion-label position="fixed"> Octava</ion-label>
+      <ion-range mode="ios" min="-3" max="3" step="1" snaps="true" [(ngModel)]="octave"></ion-range>
+      <ion-badge> {{octave}}</ion-badge>
     </ion-item>
 
+    <ion-item>
+      <ion-label position="fixed"> Attack</ion-label>
+      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="attack"></ion-range>
+      <ion-badge> {{attack}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed"> decay</ion-label>
+      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="decay"></ion-range>
+      <ion-badge> {{decay}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed"> sustain</ion-label>
+      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="sustain"></ion-range>
+      <ion-badge> {{sustain}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed"> release</ion-label>
+      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="release"></ion-range>
+      <ion-badge> {{release}}</ion-badge>
+    </ion-item>
 
     <ion-grid class="keyboard" no-padding>
       <ion-row class="black">
         <ion-col [size]="12 / 8.51" [offset]="!i && (6 / 8.51) || 0.001" *ngFor="let key of keyboard.black; let i = index">
-          <ion-button size="small" expand="full" color="dark" fill="solid" *ngIf="!!key" (touchstart)="trigger(key)" (touchend)="release(key)"
-            (touchcancel)="release(key)" (mousedown)="trigger(key)" (mouseup)="release(key)" (mouseout)="release(key)">
+          <ion-button mode="ios" size="small" expand="full" color="dark" fill="solid" *ngIf="!!key" (touchstart)="trigger(key)" (touchend)="releaseKey(key)"
+            (touchcancel)="releaseKey(key)" (mousedown)="trigger(key)" (mouseup)="releaseKey(key)" (mouseout)="releaseKey(key)">
             {{key.name}}</ion-button>
         </ion-col>
       </ion-row>
-      
+
       <ion-row class="white">
         <ion-col [size]="12 / 8.51" *ngFor="let key of keyboard.white">
-          <ion-button size="medium" expand="full" color="light" fill="solid" (touchstart)="trigger(key)" (touchend)="release(key)"
-            (touchcancel)="release(key)" (mousedown)="trigger(key)" (mouseup)="release(key)" (mouseout)="release(key)">
+          <ion-button mode="ios" size="medium" expand="full" color="light" fill="solid" (touchstart)="trigger(key)" (touchend)="releaseKey(key)"
+            (touchcancel)="releaseKey(key)" (mousedown)="trigger(key)" (mouseup)="releaseKey(key)" (mouseout)="releaseKey(key)">
             {{key.name}}</ion-button>
         </ion-col>
       </ion-row>

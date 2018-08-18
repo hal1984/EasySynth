@@ -52,6 +52,10 @@ export class HomePage implements OnInit {
   };
 
   public octave = 0;
+  public attack = 30;
+  public decay = 50;
+  public sustain = 90;
+  public release = 10;
   public audioCtx: AudioContext;
   public gainNode: GainNode;
 
@@ -75,9 +79,9 @@ export class HomePage implements OnInit {
   }
 
   /**
-   * release
+   * releaseKey
    */
-  public release(key: TKeyInfo) {
+  public releaseKey(key: TKeyInfo) {
     this.stopKey(key);
   }
 
