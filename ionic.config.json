@@ -1,5 +1,7 @@
 {
   "name": "EasySynth",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

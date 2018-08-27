@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Content } from '@ionic/angular';
+
+import { get as _get } from 'lodash';
 
 type EKeyColor = 'black' | 'white';
 
@@ -8,6 +11,7 @@ interface TKeyInfo {
   pitch: number;
   name: string;
   oscillator?: OscillatorNode;
+  filter?: BiquadFilterNode;
 }
 
 
@@ -16,7 +20,7 @@ interface TKeyInfo {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
 
   public keyboard = {
     black: [{
@@ -52,18 +56,29 @@ export class HomePage implements OnInit {
   };
 
   public octave = 0;
-  public attack = 30;
-  public decay = 50;
-  public sustain = 90;
-  public release = 10;
+  public attack = 0;
+  public decay = 0;
+  public sustain = 0;
+  public release = 0;
+  public cutoff = 3;
+  public resonance = 0;
+  public modAmount = 0;
   public audioCtx: AudioContext;
   public gainNode: GainNode;
+
+  @ViewChild(Content) content: Content;
 
   ngOnInit(): void {
     this.audioCtx = new (window['AudioContext'] || window['webkitAudioContext'])();
     this.gainNode = this.audioCtx.createGain();
+
     this.gainNode.connect(this.audioCtx.destination);
   }
+
+  ngAfterViewInit(): void {
+    _get(this, 'content', { scrollToBottom: () => { } }).scrollToBottom();
+  }
+
   /**
    * trigger
    */
@@ -71,10 +86,27 @@ export class HomePage implements OnInit {
     this.stopKey(key);
 
     const oscillator = this.audioCtx.createOscillator();
-    oscillator.connect(this.gainNode);
     oscillator.type = 'square';
     oscillator.frequency.value = key.pitch * Math.pow(2, this.octave);
+
+    const filter = this.audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+
+    const attackStart = this.audioCtx.currentTime;
+    const decayStart = attackStart + this.attack / 1000.0;
+
+    filter.frequency.setValueAtTime(this.hzCutoff, this.audioCtx.currentTime);
+    filter.frequency.setTargetAtTime(this.hzCutoff + this.modAmount * 128, attackStart, this.attack / 4000.0);
+    filter.frequency.setTargetAtTime(this.hzCutoff + this.modAmount * this.sustain, decayStart, this.decay / 4000.0);
+
+
+    filter.Q.setValueAtTime(this.resonance, this.audioCtx.currentTime);
+
+    oscillator.connect(filter);
+    filter.connect(this.gainNode);
+
     key.oscillator = oscillator;
+    key.filter = filter;
     key.oscillator.start();
   }
 
@@ -87,8 +119,24 @@ export class HomePage implements OnInit {
 
   private stopKey(key: TKeyInfo) {
     if (key.oscillator) {
-      key.oscillator.stop();
+
+      const releaseEnd = this.audioCtx.currentTime;
+      const { filter, oscillator } = key;
+
+      filter.frequency.setTargetAtTime(0, releaseEnd, this.release / 4000);
+      setTimeout(() => {
+        filter.frequency.cancelScheduledValues(releaseEnd);
+        oscillator.stop();
+        filter.disconnect();
+      }, this.release);
+
       delete key.oscillator;
+      delete key.filter;
     }
   }
+
+  public get hzCutoff(): number {
+    return 40 * Math.pow(2, this.cutoff);
+  }
+
 }

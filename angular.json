@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular-devkit/core/src/workspace/workspace-schema.json",
-  "version": 6,
+  "version": 8,
   "defaultProject": "app",
   "projects": {
     "app": {
@@ -30,6 +30,7 @@
                 "input": "node_modules/@ionic/angular/dist/ionic/svg",
                 "output": "./svg"
               },
+              "src/manifest.json",
               "src/manifest.json"
             ],
             "styles": [
@@ -102,6 +103,7 @@
                 "input": "src/assets",
                 "output": "/assets"
               },
+              "src/manifest.json",
               "src/manifest.json"
             ]
           }

@@ -9,33 +9,51 @@
   <ion-list>
 
     <ion-item>
-      <ion-label position="fixed"> Octava</ion-label>
+      <ion-label position="fixed">Octava</ion-label>
       <ion-range mode="ios" min="-3" max="3" step="1" snaps="true" [(ngModel)]="octave"></ion-range>
-      <ion-badge> {{octave}}</ion-badge>
+      <ion-badge>{{octave}}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed"> Attack</ion-label>
-      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="attack"></ion-range>
-      <ion-badge> {{attack}}</ion-badge>
+      <ion-label position="fixed">Attack</ion-label>
+      <ion-range mode="ios" min="0" max="10000" step="1" [(ngModel)]="attack"></ion-range>
+      <ion-badge>{{attack}}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed"> decay</ion-label>
-      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="decay"></ion-range>
-      <ion-badge> {{decay}}</ion-badge>
+      <ion-label position="fixed">decay</ion-label>
+      <ion-range mode="ios" min="0" max="10000" step="1" [(ngModel)]="decay"></ion-range>
+      <ion-badge>{{decay}}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed"> sustain</ion-label>
+      <ion-label position="fixed">sustain</ion-label>
       <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="sustain"></ion-range>
-      <ion-badge> {{sustain}}</ion-badge>
+      <ion-badge>{{sustain}}</ion-badge>
     </ion-item>
 
     <ion-item>
-      <ion-label position="fixed"> release</ion-label>
-      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="release"></ion-range>
-      <ion-badge> {{release}}</ion-badge>
+      <ion-label position="fixed">release</ion-label>
+      <ion-range mode="ios" min="0" max="10000" step="1" [(ngModel)]="release"></ion-range>
+      <ion-badge>{{release}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">modAmount</ion-label>
+      <ion-range mode="ios" min="-64" max="64" step="1" [(ngModel)]="modAmount"></ion-range>
+      <ion-badge>{{modAmount}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">cutoff</ion-label>
+      <ion-range mode="ios" min="0" max="11" step="0.01" [(ngModel)]="cutoff"></ion-range>
+      <ion-badge>{{cutoff | round}}</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="fixed">resonance</ion-label>
+      <ion-range mode="ios" min="0" max="80" step="1" [(ngModel)]="resonance"></ion-range>
+      <ion-badge>{{resonance}}</ion-badge>
     </ion-item>
 
     <ion-grid class="keyboard" no-padding>
