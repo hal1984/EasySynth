@@ -126,7 +126,7 @@ export class HomePage implements OnInit, AfterViewInit {
       filter.frequency.setTargetAtTime(0, releaseEnd, this.release / 4000);
       setTimeout(() => {
         filter.frequency.cancelScheduledValues(releaseEnd);
-        oscillator.stop();
+        oscillator.disconnect();
         filter.disconnect();
       }, this.release);
 
