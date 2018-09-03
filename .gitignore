@@ -32,5 +32,6 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
-/.firebaserc/
+/.firebaserc
+/.firebase
 /firebase.json
