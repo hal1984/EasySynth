@@ -1,0 +1,6 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "EasySynth",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
