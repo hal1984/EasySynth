@@ -18,8 +18,12 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      Plugins.StatusBar.setStyle({ style: StatusBarStyle.Light }).catch(e => console.error(e));
-      Plugins.SplashScreen.hide().catch(reason => console.error(reason));
+      if (Plugins.StatusBar) {
+        Plugins.StatusBar.setStyle({ style: StatusBarStyle.Light }).catch(e => console.error(e));
+      }
+      if (Plugins.SplashScreen) {
+        Plugins.SplashScreen.hide().catch(reason => console.error(reason));
+      }
     });
   }
 }

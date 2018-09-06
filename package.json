@@ -28,7 +28,7 @@
     "@ionic/schematics-angular": "1.0.5",
     "core-js": "2.5.7",
     "lodash": "4.17.10",
-    "rxjs": "6.3.1",
+    "rxjs": "6.3.2",
     "zone.js": "0.8.26"
   },
   "devDependencies": {

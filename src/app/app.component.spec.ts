@@ -5,9 +5,10 @@ import { Platform } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 
+
 describe('AppComponent', () => {
 
-  let platformReadySpy, platformSpy;
+  let platformReadySpy, platformSpy: any;
 
   beforeEach(async(() => {
     platformReadySpy = Promise.resolve();

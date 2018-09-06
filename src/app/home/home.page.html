@@ -28,8 +28,8 @@
 
     <ion-item>
       <ion-label position="fixed">sustain</ion-label>
-      <ion-range mode="ios" min="0" max="128" step="1" [(ngModel)]="sustain"></ion-range>
-      <ion-badge>{{sustain}}</ion-badge>
+      <ion-range mode="ios" min="0" max="1" step="0.01" [(ngModel)]="sustain"></ion-range>
+      <ion-badge>{{sustain | round:2 }}</ion-badge>
     </ion-item>
 
     <ion-item>
